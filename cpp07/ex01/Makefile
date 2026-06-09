@@ -3,10 +3,10 @@ NAME		= ex01
 CXX			= c++
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 
-SRCS		= main.cpp Bureaucrat.cpp Form.cpp
+SRCS		= main.cpp
 OBJS		= $(SRCS:.cpp=.o)
 
-HEADERS		= Bureaucrat.hpp Form.hpp
+HEADERS		= iter.hpp
 
 all: $(NAME)
 

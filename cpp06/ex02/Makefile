@@ -1,12 +1,12 @@
-NAME		= ex01
+NAME		= ex02
 
 CXX			= c++
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 
-SRCS		= main.cpp Bureaucrat.cpp Form.cpp
+SRCS		= main.cpp Base.cpp A.cpp B.cpp C.cpp
 OBJS		= $(SRCS:.cpp=.o)
 
-HEADERS		= Bureaucrat.hpp Form.hpp
+HEADERS		= Base.hpp A.hpp B.hpp C.hpp
 
 all: $(NAME)
 
