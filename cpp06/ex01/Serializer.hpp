@@ -3,24 +3,19 @@
 
 #include <iostream>
 #include <string>
-#include <iostream>
-#include <stdint.h> 
-
-struct Data
-{
-    int n;
-    std::string s;
-};
+#include "Data.hpp"
+#include <stdint.h>
 
 class Serializer
 {
     private:
         Serializer();
-        Serializer(const Serializer& copy);
-        Serializer& operator=(const Serializer& other);
+        Serializer(const Serializer &copy);
+        Serializer &operator=(const Serializer &other);
         ~Serializer();
+
     public:
-        static uintptr_t serialize(Data* ptr);
-        static Data* deserialize(uintptr_t raw);
+        static uintptr_t    serialize(Data* ptr);
+        static Data*    deserialize(uintptr_t raw);
 };
 #endif

@@ -1,12 +1,13 @@
-NAME		= ex01
+NAME		=  serializer
 
 CXX			= c++
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 
-SRCS		= main.cpp Serializer.cpp
+SRCS		= main.cpp  Serializer.cpp
 OBJS		= $(SRCS:.cpp=.o)
 
-HEADERS		= Serializer.hpp
+HEADERS		=  Serializer.hpp Data.hpp
+
 
 all: $(NAME)
 
