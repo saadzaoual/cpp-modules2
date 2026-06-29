@@ -2,68 +2,31 @@
 #include <string>
 #include "iter.hpp"
 
-//functions that READ elements 
-template <typename T>
-void printElem(const T& x)
+void times_two(int &i)
 {
-    std::cout << x << " ";
+	i *= 2;
 }
 
-//functions that MODIFY elements (non-const reference)
-template <typename T>
-void addOne(T& x)
+void to_upper(std::string &str)
 {
-    x += 1;
+	for (size_t i = 0; i < str.length(); i++)
+		str[i] = std::toupper(str[i]);
 }
 
-template <typename T>
-void doubleIt(T& x)
+int main( void )
 {
-    x *= 2;
-}
+	std::cout << "\033[33m" << "Test int array\n"<< "\033[0m";
+	int int_arr[] = {1, 2, 3};
+	
+	::iter(int_arr, 3, times_two);
+	for (int i = 0; i < 3; i++)
+		std::cout << int_arr[i] << std::endl;
 
-int main(void)
-{
-    std::cout << "===== int array =====" << std::endl;
-    int arr[] = {1, 2, 3, 4, 5};
-    size_t len = sizeof(arr) / sizeof(arr[0]);
+	std::cout << "\033[33m" << "Test string array\n"<< "\033[0m";
+	std::string str_arr[] = {"Hello", "World", "!"};
+	::iter(str_arr, 3, to_upper);
+	for (int i = 0; i < 3; i++)
+		std::cout << str_arr[i] << std::endl;
 
-    std::cout << "original:   ";
-    iter(arr, len, printElem<int>);
-    std::cout << std::endl;
-
-    iter(arr, len, addOne<int>);
-    std::cout << "after +1:   ";
-    iter(arr, len, printElem<int>);
-    std::cout << std::endl;
-
-    iter(arr, len, doubleIt<int>);
-    std::cout << "after x2:   ";
-    iter(arr, len, printElem<int>);
-    std::cout << std::endl;
-
-    std::cout << std::endl << "===== double array =====" << std::endl;
-    double darr[] = {1.5, 2.5, 3.5};
-    std::cout << "original:   ";
-    iter(darr, 3, printElem<double>);
-    std::cout << std::endl;
-
-    iter(darr, 3, doubleIt<double>);
-    std::cout << "after x2:   ";
-    iter(darr, 3, printElem<double>);
-    std::cout << std::endl;
-
-    std::cout << std::endl << "===== string array =====" << std::endl;
-    std::string words[] = {"templates", "are", "generic"};
-    std::cout << "strings:    ";
-    iter(words, 3, printElem<std::string>);
-    std::cout << std::endl;
-
-    std::cout << std::endl << "===== char array =====" << std::endl;
-    char letters[] = {'a', 'b', 'c', 'd'};
-    std::cout << "chars:      ";
-    iter(letters, 4, printElem<char>);
-    std::cout << std::endl;
-
-    return 0;
+	return 0;
 }

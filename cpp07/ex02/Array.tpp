@@ -1,7 +1,6 @@
 #ifndef ARRAY_TPP
 # define ARRAY_TPP
 
-// Constructors
 template <typename T>
 Array<T>::Array() : _arr(NULL), _size(0)
 {}
@@ -23,7 +22,6 @@ Array<T>::~Array()
 	delete [] _arr;
 }
 
-// Operators
 template <typename T>
 Array<T> &Array<T>::operator=(Array const &copy)
 {
@@ -54,14 +52,12 @@ T const &Array<T>::operator[](unsigned int i) const
 	return (_arr[i]);
 }
 
-// Methods
 template <typename T>
 unsigned int Array<T>::size() const
 {
 	return (_size);
 }
 
-// Exceptions
 template <typename T>
 const char *Array<T>::OutOfBoundsException::what() const throw()
 {
