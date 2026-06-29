@@ -1,89 +1,38 @@
 #ifndef ARRAY_HPP
-#define ARRAY_HPP
+# define ARRAY_HPP
 
-#include <iostream>
-#include <string>
-#include <stdexcept>
+# include <iostream>
+# include <exception>
 
 template <typename T>
 class Array
 {
-private:
-    T* _data;
-    size_t _size;
+	private:
+		T				*_arr;
+		unsigned int	_size;
+	public:
+		// Constructors
+		Array();
+		Array(unsigned int n);
+		Array(Array const &copy);
+		~Array();
 
-public:
-    // Default constructor
-    Array() : _data(NULL), _size(0) {}
+		// Operators
+		Array			&operator=(Array const &copy);
+		T				&operator[](unsigned int i);
+		T const			&operator[](unsigned int i) const;
 
-    // Constructor with size
-    Array(size_t n) : _size(n)
-    {
-        if (n > 0)
-            _data = new T[n]();
-        else
-            _data = NULL;
-    }
+		// Methods
+		unsigned int	size() const;
+	
+		// Exceptions
+		class OutOfBoundsException : public std::exception
+		{
+			public:
+				virtual const char *what() const throw();
+		};
 
-    // Copy constructor
-    Array(const Array& other) : _size(other._size)
-    {
-        if (_size > 0)
-        {
-            _data = new T[_size];
-            for (size_t i = 0; i < _size; i++)
-                _data[i] = other._data[i];
-        }
-        else
-            _data = NULL;
-    }
-
-    // Assignment operator
-    Array& operator=(const Array& other)
-    {
-        if (this != &other)
-        {
-            delete[] _data;
-            _size = other._size;
-            if (_size > 0)
-            {
-                _data = new T[_size];
-                for (size_t i = 0; i < _size; i++)
-                    _data[i] = other._data[i];
-            }
-            else
-                _data = NULL;
-        }
-        return *this;
-    }
-
-    // Destructor
-    ~Array()
-    {
-        delete[] _data;
-    }
-
-    // Subscript operator with bounds checking
-    T& operator[](size_t index)
-    {
-        if (index >= _size)
-            throw std::out_of_range("Array index out of range");
-        return _data[index];
-    }
-
-    // Const subscript operator
-    const T& operator[](size_t index) const
-    {
-        if (index >= _size)
-            throw std::out_of_range("Array index out of range");
-        return _data[index];
-    }
-
-    // Size getter
-    size_t size() const
-    {
-        return _size;
-    }
 };
+# include "Array.tpp"
 
 #endif

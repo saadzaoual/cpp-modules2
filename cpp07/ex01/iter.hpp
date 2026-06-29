@@ -2,16 +2,13 @@
 #define ITER_HPP
 
 #include <iostream>
-#include <string>
+#include <cstddef>
 
 template <typename T, typename F>
-void iter(T* array, size_t length, F func)
+void iter(T* array, size_t length, F f)
 {
-    size_t i = 0;
-    while(i < length)
-    {
-        func(array[i]);
-        i++;
-    };
-};
+    for (size_t i = 0; i < length; i++)
+        f(array[i]);
+}
+
 #endif

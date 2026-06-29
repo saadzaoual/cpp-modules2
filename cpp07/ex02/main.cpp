@@ -1,9 +1,11 @@
 #include <iostream>
+#include <cstdlib>   
+#include <ctime>     
 #include "Array.hpp"
-#include <cstdlib>
-#include <ctime>
 
 #define MAX_VAL 750
+
+
 int main(int, char**)
 {
     Array<int> numbers(MAX_VAL);
@@ -15,7 +17,7 @@ int main(int, char**)
         numbers[i] = value;
         mirror[i] = value;
     }
-    //SCOPE
+
     {
         Array<int> tmp = numbers;
         Array<int> test(tmp);
