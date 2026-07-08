@@ -1,27 +1,27 @@
 #ifndef EASYFIND_HPP
-#define EASYFIND_HPP
+# define EASYFIND_HPP
 
-#include <algorithm>
-#include <exception>
-
-class ValueNotFoundException : public std::exception
+# include<algorithm>
+# include<exception>
+class NotFoundException : public std::exception
 {
-    public:
-        virtual const char* what() const throw()
-        {
-            return "easyfind: value not found in container";
-        }
+	public:
+		virtual const char* what() const throw()
+		{
+			return ("Number not found");
+		}
+	
 };
 
 template <typename T>
-typename T::iterator easyfind(T& container, int value)
+typename T::iterator easyfind(T &container, int n)
 {
-    typename T::iterator it = std::find(container.begin(), container.end(), value);
+	typename T::iterator it;
 
-    if (it == container.end())
-        throw ValueNotFoundException();
-
-    return it;
+	it = std::find(container.begin(), container.end(), n);
+	if (it == container.end())
+		throw NotFoundException();
+	return (it);
 }
 
 #endif
