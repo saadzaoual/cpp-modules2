@@ -13,7 +13,7 @@ class MutantStack : public std::stack<T>
         MutantStack(MutantStack const &other);
         MutantStack &operator=(MutantStack const &other);
         ~MutantStack();
-
+    
     typedef typename std::stack<T>::container_type::iterator iterator;
     typedef typename std::stack<T>::container_type::const_iterator const_iterator;
     typedef typename std::stack<T>::container_type::reverse_iterator reverse_iterator;

@@ -9,8 +9,8 @@
 class Span
 {
     private:
-        unsigned int _N;
-        std::vector<int>	_v;
+        unsigned int _N; // we created the max class limiter int.
+        std::vector<int>	_v; // this is the container that will hold our numbers
     public:
         Span();
         Span(unsigned int N);
@@ -21,8 +21,8 @@ class Span
         //methods;
         int shortestSpan();
 	    int longestSpan();
-        void    addNumber(int n);
-        void    addNumber(std::vector<int>::iterator begin, std::vector<int>::iterator end);
+        void    addNumber(int n);// this add a number to our container.
+        void    addNumber(std::vector<int>::iterator begin, std::vector<int>::iterator end);//idont know what this is .
 
         //exceptions;
         class FullContainerException : public std::exception
