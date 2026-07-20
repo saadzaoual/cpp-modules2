@@ -20,11 +20,7 @@ rpn::~rpn()
 {
 }
 
-/*
-** a = the FIRST operand  (pushed first, sits deeper in the stack)
-** b = the SECOND operand (pushed last, popped first)
-** For "a b -" we must compute a - b, NOT b - a.
-*/
+
 int rpn::CalculationResult(int a, int b, char o)
 {
     switch (o)
@@ -60,13 +56,12 @@ void rpn::ReadInput(std::string input)
         }
         else if (operators.find(input[i]) != std::string::npos)
         {
-            // need at least two operands on the stack
             if (_numbers.size() < 2)
                 throw std::invalid_argument("Error");
 
-            int b = _numbers.top();   // SECOND operand (pushed last)
+            int b = _numbers.top();
             _numbers.pop();
-            int a = _numbers.top();   // FIRST operand (pushed first)
+            int a = _numbers.top();
             _numbers.pop();
 
             _numbers.push(CalculationResult(a, b, input[i]));
@@ -77,7 +72,6 @@ void rpn::ReadInput(std::string input)
         }
     }
 
-    // at the end there must be EXACTLY one value left
     if (_numbers.size() != 1)
         throw std::invalid_argument("Error");
 

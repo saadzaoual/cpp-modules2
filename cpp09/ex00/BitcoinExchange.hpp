@@ -7,6 +7,7 @@
 #include <exception>
 #include <fstream>
 #include <sstream>
+#include <cctype>
 
 class BitcoinExchange
 {
@@ -47,10 +48,17 @@ class BitcoinExchange
 
         class InvalidDateException : public std::exception
         {
+            private:
+                std::string _msg;
+
             public:
+                InvalidDateException(std::string const &line)
+                    : _msg("Error: bad input. => " + line) {}
+                virtual ~InvalidDateException() throw() {}
+
                 virtual const char *what() const throw()
                 {
-                    return ("Error: bad input.");
+                    return (_msg.c_str());
                 }
         };
 
