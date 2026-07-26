@@ -133,7 +133,6 @@ double BitcoinExchange::_parseValue(std::string const &value) const
     if (value.empty())
         throw InvalidValueException();
 
-    // reject nan / inf before the stream accepts them
     for (std::string::size_type i = 0; i < value.size(); i++)
     {
         if (isalpha(value[i]))

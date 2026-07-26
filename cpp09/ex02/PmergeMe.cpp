@@ -44,14 +44,11 @@ static size_t jacobsthal(size_t n)
     return (b);
 }
 
-/* ========================== VECTOR ========================== */
-
 void PmergeMe::_insertVector(std::vector<int> &chain, std::vector<int> &pend)
 {
     if (pend.empty())
         return;
 
-    // b1 is free: smaller than the smallest element of the chain
     chain.insert(chain.begin(), pend[0]);
 
     size_t inserted = 1;
@@ -65,11 +62,7 @@ void PmergeMe::_insertVector(std::vector<int> &chain, std::vector<int> &pend)
 
         for (size_t idx = jac; idx > prev; idx--)
         {
-            size_t index = idx - 1;   // 0-based pend index (>= 1 here)
-
-            // owner of pend[index] started at chain position `index`;
-            // after `inserted` insertions it sits at most at index+inserted,
-            // so everything strictly before it is [begin, begin+index+inserted)
+            size_t index = idx - 1;
             std::vector<int>::iterator end = chain.begin() + (index + inserted);
             std::vector<int>::iterator pos =
                 std::lower_bound(chain.begin(), end, pend[index]);
@@ -91,7 +84,6 @@ void PmergeMe::_sortVector(std::vector<int> &v)
     if (hasOdd)
         odd = v[n - 1];
 
-    // phase 1: pair up, (big, small)
     std::vector<std::pair<int,int> > pairs;
     for (size_t i = 0; i + 1 < n; i += 2)
     {
@@ -99,13 +91,11 @@ void PmergeMe::_sortVector(std::vector<int> &v)
         else                 pairs.push_back(std::make_pair(v[i + 1], v[i]));
     }
 
-    // phase 2: recursively sort the bigs with the same algorithm
     std::vector<int> bigs;
     for (size_t i = 0; i < pairs.size(); i++)
         bigs.push_back(pairs[i].first);
     _sortVector(bigs);
 
-    // rebuild pend in the order of the sorted bigs (handles duplicates)
     std::vector<int>  pend;
     std::vector<bool> used(pairs.size(), false);
     for (size_t i = 0; i < bigs.size(); i++)
@@ -121,11 +111,9 @@ void PmergeMe::_sortVector(std::vector<int> &v)
         }
     }
 
-    // phases 4+5: chain = sorted bigs, insert pend in Jacobsthal order
     std::vector<int> chain = bigs;
     _insertVector(chain, pend);
 
-    // straggler: no partner, search the whole chain
     if (hasOdd)
     {
         std::vector<int>::iterator pos =
@@ -134,8 +122,6 @@ void PmergeMe::_sortVector(std::vector<int> &v)
     }
     v = chain;
 }
-
-/* ========================== DEQUE ========================== */
 
 void PmergeMe::_insertDeque(std::deque<int> &chain, std::deque<int> &pend)
 {
@@ -215,8 +201,6 @@ void PmergeMe::_sortDeque(std::deque<int> &d)
     }
     d = chain;
 }
-
-/* ======================= run + timing ======================= */
 
 void PmergeMe::run()
 {
