@@ -31,19 +31,13 @@ class BitcoinExchange
         class CouldNotOpenFileException : public std::exception
         {
             public:
-                virtual const char *what() const throw()
-                {
-                    return ("Error: could not open file.");
-                }
+                virtual const char *what() const throw();
         };
 
         class InvalidDatabaseFormatException : public std::exception
         {
             public:
-                virtual const char *what() const throw()
-                {
-                    return ("Error: invalid database format, expected 'date,exchange_rate'");
-                }
+                virtual const char *what() const throw();
         };
 
         class InvalidDateException : public std::exception
@@ -52,32 +46,22 @@ class BitcoinExchange
                 std::string _msg;
 
             public:
-                InvalidDateException(std::string const &line)
-                    : _msg("Error: bad input. => " + line) {}
-                virtual ~InvalidDateException() throw() {}
+                InvalidDateException(std::string const &line);
+                virtual ~InvalidDateException() throw();
 
-                virtual const char *what() const throw()
-                {
-                    return (_msg.c_str());
-                }
+                virtual const char *what() const throw();
         };
 
         class InvalidValueException : public std::exception
         {
             public:
-                virtual const char *what() const throw()
-                {
-                    return ("Error: not a positive number.");
-                }
+                virtual const char *what() const throw();
         };
 
         class ValueTooLargeException : public std::exception
         {
             public:
-                virtual const char *what() const throw()
-                {
-                    return ("Error: too large a number.");
-                }
+                virtual const char *what() const throw();
         };
 };
 

@@ -7,12 +7,11 @@ int main(int argc, char **argv)
         std::cerr << "Error" << std::endl;
         return (1);
     }
-
     try
     {
-        PmergeMe p;
-        p.parseInput(argc, argv);
-        p.run();
+        PmergeMe sorter;
+        sorter.parseInput(argc, argv);
+        sorter.run();
     }
     catch (const std::exception &e)
     {

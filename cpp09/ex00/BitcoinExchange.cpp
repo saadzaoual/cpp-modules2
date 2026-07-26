@@ -22,6 +22,40 @@ BitcoinExchange::~BitcoinExchange()
 {
 }
 
+const char *BitcoinExchange::CouldNotOpenFileException::what() const throw()
+{
+    return ("Error: could not open file.");
+}
+
+const char *BitcoinExchange::InvalidDatabaseFormatException::what() const throw()
+{
+    return ("Error: invalid database format, expected 'date,exchange_rate'");
+}
+
+BitcoinExchange::InvalidDateException::InvalidDateException(std::string const &line)
+    : _msg("Error: bad input => " + line)
+{
+}
+
+BitcoinExchange::InvalidDateException::~InvalidDateException() throw()
+{
+}
+
+const char *BitcoinExchange::InvalidDateException::what() const throw()
+{
+    return (_msg.c_str());
+}
+
+const char *BitcoinExchange::InvalidValueException::what() const throw()
+{
+    return ("Error: not a positive number.");
+}
+
+const char *BitcoinExchange::ValueTooLargeException::what() const throw()
+{
+    return ("Error: too large a number.");
+}
+
 std::map<std::string, double> const &BitcoinExchange::getDatabase() const
 {
     return (_database);

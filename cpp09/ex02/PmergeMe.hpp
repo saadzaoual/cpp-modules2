@@ -8,21 +8,21 @@
 #include <algorithm>
 #include <sstream>
 #include <ctime>
-#include <stdexcept>
+#include <cctype>
+#include <exception>
 
 class PmergeMe
 {
     private:
+        std::vector<std::string> _input;
         std::vector<int> _vec;
         std::deque<int>  _deq;
 
-        // vector version
         void _sortVector(std::vector<int> &v);
-        void _insertVector(std::vector<int> &main, std::vector<int> &pend);
-
-        // deque version
         void _sortDeque(std::deque<int> &d);
-        void _insertDeque(std::deque<int> &main, std::deque<int> &pend);
+
+        void _insertVector(std::vector<int> &chain, std::vector<int> &pend);
+        void _insertDeque(std::deque<int> &chain, std::deque<int> &pend);
 
     public:
         PmergeMe();
@@ -36,10 +36,7 @@ class PmergeMe
         class InvalidInputException : public std::exception
         {
             public:
-                virtual const char *what() const throw()
-                {
-                    return ("Error");
-                }
+                virtual const char *what() const throw();
         };
 };
 
